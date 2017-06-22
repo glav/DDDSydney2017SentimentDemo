@@ -10,6 +10,7 @@ namespace EmailCollector
 {
     public class MailCollector
     {
+
         public void GetLatestMail(Config config)
         {
             using (var client = new Pop3Client())

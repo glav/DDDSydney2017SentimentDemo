@@ -27,7 +27,10 @@ namespace EmailCollector
                 UseSSL = true;
             }
             int portValue;
-            if (!int.TryParse(portText, out portValue))
+            if (int.TryParse(portText, out portValue))
+            {
+                Port = portValue;
+            } else
             {
                 Port = 25;
             }
