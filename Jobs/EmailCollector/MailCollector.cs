@@ -1,4 +1,5 @@
-﻿using OpenPop.Mime;
+﻿using Diagnostics;
+using OpenPop.Mime;
 using OpenPop.Pop3;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,22 @@ namespace EmailCollector
 {
     public class MailCollector
     {
+        private readonly Config _config;
 
-        public void GetLatestMail(Config config)
+        public MailCollector(Config config)
+        {
+            _config = config;
+        }
+
+        public void GetLatestMail()
         {
             using (var client = new Pop3Client())
             {
                 // Connect to the server
-                client.Connect(config.Hostname, config.Port, config.UseSSL);
+                client.Connect(_config.Hostname, _config.Port, _config.UseSSL);
 
                 // Authenticate ourselves towards the server
-                client.Authenticate(config.Username, config.Password);
+                client.Authenticate(_config.Username, _config.Password);
 
                 // Get the number of messages in the inbox
                 int messageCount = client.GetMessageCount();

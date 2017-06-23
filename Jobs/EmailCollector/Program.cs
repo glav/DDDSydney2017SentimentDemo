@@ -24,10 +24,6 @@ namespace EmailCollector
             var host = new JobHost();
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
-
-            var appConfig = new Config();
-            var collector = new MailCollector();
-            collector.GetLatestMail(appConfig);
         }
     }
 }
