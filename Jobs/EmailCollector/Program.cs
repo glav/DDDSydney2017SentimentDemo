@@ -14,6 +14,8 @@ namespace EmailCollector
         // AzureWebJobsDashboard and AzureWebJobsStorage
         static void Main()
         {
+            //Environment.SetEnvironmentVariable("AzureWebJobsEnv", "Development");
+
             var config = new JobHostConfiguration();
 
             if (config.IsDevelopment)

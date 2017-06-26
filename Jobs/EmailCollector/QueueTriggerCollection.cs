@@ -1,4 +1,6 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using EmailCollector.CommandProcessors;
+using Jobs.Common.Diagnostics;
+using Microsoft.Azure.WebJobs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,11 +12,17 @@ namespace EmailCollector
 {
     public class QueueTriggerCollection
     {
-        public static void ProcessQueueMessage([QueueTrigger("mailqueue")]string logMessage, TextWriter logger)
+        private const string QueueName = "emailqueue";
+
+        public static void ProcessQueueMessage([QueueTrigger(QueueName)]string message, TextWriter logger)
         {
 
             var appConfig = new Config();
-            var collector = new MailCollector(appConfig);
+            var jobLogger = new JobLogger(logger);
+
+            jobLogger.WriteLine($"Message received in the [{QueueName}], Content: [{message}]");
+
+            var collector = new MailCollectionProcessor(appConfig, null, jobLogger);
             collector.GetLatestMail();
 
         }
