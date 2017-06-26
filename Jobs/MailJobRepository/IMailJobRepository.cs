@@ -1,4 +1,5 @@
 ﻿using Jobs.Core;
+using Jobs.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace MailJobRepository
 {
     public interface IMailJobRepository
     {
-        void StoreMailMessages(IEnumerable<EmailInformation> mailMessages);
-        void ClearAllMailMessages();
+        Task StoreMailMessagesAsync(IEnumerable<EmailInformation> mailMessages);
+        Task ClearAllMailMessagesAsync();
+        Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysed();
+        Task UpdateMessageAsync(EmailInformation emailMsg);
     }
 }

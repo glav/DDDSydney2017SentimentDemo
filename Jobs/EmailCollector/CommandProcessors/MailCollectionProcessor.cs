@@ -1,4 +1,5 @@
 ﻿using Jobs.Core;
+using Jobs.Core.Data;
 using Jobs.Core.Diagnostics;
 using MailJobRepository;
 using OpenPop.Pop3;
@@ -53,7 +54,7 @@ namespace EmailCollector.CommandProcessors
                 {
                     var headers = client.GetMessageHeaders(i);
                     var msg = client.GetMessage(i);
-                    allMessages.Add(new EmailInformation { From = headers.From?.Address, Body = msg.FindFirstPlainTextVersion().GetBodyAsText(), TimeOfMail = headers.DateSent });
+                    allMessages.Add(new EmailInformation { From = headers.From?.Address, Body = msg.FindFirstPlainTextVersion().GetBodyAsText(), TimeOfMail = headers.DateSent.Date, partitionKey="newmail" });
                 }
 
                 _logger.WriteLine($"#{messageCount} messages have been collected");
@@ -63,7 +64,7 @@ namespace EmailCollector.CommandProcessors
             }
         }
 
-        private void StoreCollectedMail(List<EmailInformation> messages)
+        private async void StoreCollectedMail(List<EmailInformation> messages)
         {
             if (messages== null)
             {
@@ -72,7 +73,7 @@ namespace EmailCollector.CommandProcessors
 
             _logger.WriteLine($"Storing #{messages.Count} messages in the repository");
 
-            _repository.StoreMailMessages(messages);
+            await _repository.StoreMailMessagesAsync(messages);
         }
     }
 }

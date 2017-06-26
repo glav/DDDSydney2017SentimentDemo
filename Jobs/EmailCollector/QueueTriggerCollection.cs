@@ -14,10 +14,11 @@ namespace EmailCollector
 
             var appConfig = new Config();
             var jobLogger = new JobLogger(logger);
+            var repo = new MailJobRepository.MailJobRepository();
 
             jobLogger.WriteLine($"Message received in the [{QueueName}], Content: [{message}]");
 
-            var collector = new MailCollectionProcessor(appConfig, null, jobLogger);
+            var collector = new MailCollectionProcessor(appConfig, repo, jobLogger);
             collector.CollectMail();
 
         }
