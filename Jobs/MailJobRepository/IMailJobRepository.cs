@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jobs.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace MailJobRepository
 {
     public interface IMailJobRepository
     {
-        void StoreMailMessages();
+        void StoreMailMessages(IEnumerable<EmailInformation> mailMessages);
         void ClearAllMailMessages();
     }
 }

@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tagValues_Application": {
+            "value": "DDDSydney2017Demo"
+        },
+
+
+        "cosmosdb_name": {
+            "value": "dddsydneydemostore"
+        },
+        "cosmosdb_locationName": {
+            "value": "Australia East"
+        },
+        "cosmosdb_defaultExperience": {
+            "value": "DocumentDB"
+        },
+        "website_name": {
+            "value": "DDDSydney2017GlavsDemo"
+        },
+        "website_hostingPlanName": {
+            "value": "DDDSydney2017GlavsDemoAppServicePlan"
+        },
+        "website_location": {
+            "value": "South Central US"
+        },
+        "website_sku": {
+            "value": "Standard"
+        },
+        "website_workerSize": {
+            "value": "0"
+        },
+        "website_skuCode": {
+            "value": "S1"
+        },
+
+        "servicebus_name": {
+            "value": "ddcreadmodel"
+        },
+        "servicebus_sku": {
+            "value": "2"
+        },
+        "servicebus_messagingUnits": {
+            "value": "1"
+        }        
+
+    }
+}

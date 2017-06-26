@@ -43,5 +43,11 @@
     <Compile Include="IMailJobRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Jobs.Core\Jobs.Core.csproj">
+      <Project>{307894ac-42e5-42f1-b517-3e9c97ec76d8}</Project>
+      <Name>Jobs.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

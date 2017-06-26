@@ -1,14 +1,8 @@
-﻿using Jobs.Common.Diagnostics;
-using Jobs.Core;
+﻿using Jobs.Core;
+using Jobs.Core.Diagnostics;
 using MailJobRepository;
-using OpenPop.Mime;
 using OpenPop.Pop3;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmailCollector.CommandProcessors
 {
@@ -25,7 +19,13 @@ namespace EmailCollector.CommandProcessors
             _repository = repository;
         }
 
-        public List<EmailInformation> GetLatestMail()
+        public void CollectMail()
+        {
+            var messages = GetLatestMail();
+            StoreCollectedMail(messages);
+        }
+
+        private List<EmailInformation> GetLatestMail()
         {
             _logger.WriteLine("Getting latest mail");
 
@@ -70,10 +70,9 @@ namespace EmailCollector.CommandProcessors
                 return;
             }
 
-            foreach (var emailMsg in messages)
-            {
-            }
-            _repository.StoreMailMessages();
+            _logger.WriteLine($"Storing #{messages.Count} messages in the repository");
+
+            _repository.StoreMailMessages(messages);
         }
     }
 }

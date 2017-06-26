@@ -1,0 +1,110 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tagValues_Application":{
+            "type": "string"
+        },
+        "cosmosdb_name": {
+            "type": "string"
+        },
+        "cosmosdb_locationName": {
+            "type": "string"
+        },
+        "cosmosdb_defaultExperience": {
+            "type": "string"
+        },
+
+        "website_name": {
+            "type": "string"
+        },
+        "website_hostingPlanName": {
+            "type": "string"
+        },
+        "website_location": {
+            "type": "string"
+        },
+        "website_sku": {
+            "type": "string"
+        },
+        "website_workerSize": {
+            "type": "string"
+        },
+        "website_skuCode": {
+            "type": "string"
+        },
+
+        "servicebus_name": {
+            "type": "string"
+        },
+        "servicebus_sku": {
+            "type": "string"
+        },
+        "servicebus_messagingUnits": {
+            "type": "string"
+        }
+        
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-04-08",
+            "kind": "GlobalDocumentDB",
+            "type": "Microsoft.DocumentDb/databaseAccounts",
+            "name": "[parameters('cosmosdb_name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "locations": [
+                    {
+                        "id": "[concat(parameters('cosmosdb_name'), '-',resourceGroup().location)]",
+                        "failoverPriority": 0,
+                        "locationName": "[parameters('cosmosdb_locationName')]"
+                    }
+                ]
+            },
+            "tags":{
+                "Application": "[parameters('tagValues_Application')]"
+            }
+        },
+        
+        
+        {
+            "name": "[parameters('website_name')]",
+            "apiVersion": "2016-08-01",
+            "location": "[resourceGroup().location]",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+    	    "tags": {
+                "Application": "[parameters('tagValues_Application')]",
+                "defaultExperience": "[parameters('cosmosdb_defaultExperience')]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', parameters('website_hostingPlanName'))]",
+            ],
+            "properties": {
+                "name": "[parameters('webSite_name')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('website_hostingPlanName'))]",
+                "reserved": true,
+                "clientAffinityEnabled": false
+            }
+        },
+        {
+            "apiVersion": "2016-09-01",
+            "name": "[parameters('website_hostingPlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[parameters('website_hostingPlanName')]",
+                "workerSizeId": "[parameters('website_workerSize')]",
+                "numberOfWorkers": "1"
+            },
+            "sku": {
+                "Tier": "[parameters('website_sku')]",
+                "Name": "[parameters('website_skuCode')]"
+            }
+        }
+
+    ]
+}

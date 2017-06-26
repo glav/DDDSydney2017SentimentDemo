@@ -1,10 +1,4 @@
-﻿using Jobs.Common;
-using Jobs.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Jobs.Core;
 
 namespace EmailCollector
 {

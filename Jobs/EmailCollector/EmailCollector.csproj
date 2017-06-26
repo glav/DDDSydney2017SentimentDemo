@@ -126,10 +126,6 @@
       <Project>{307894ac-42e5-42f1-b517-3e9c97ec76d8}</Project>
       <Name>Jobs.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jobs.Common\Jobs.Common.csproj">
-      <Project>{97c5e46b-29cf-4bd4-b0bf-8be6e33d8e0f}</Project>
-      <Name>Jobs.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MailJobRepository\MailJobRepository.csproj">
       <Project>{fa0aafc5-6c8d-4ac8-8871-058ffe09c6d3}</Project>
       <Name>MailJobRepository</Name>
