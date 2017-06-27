@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using System.Diagnostics;
 
 namespace JobScheduler
 {
@@ -15,13 +16,16 @@ namespace JobScheduler
         static void Main()
         {
             var config = new JobHostConfiguration();
+            config.Tracing.ConsoleLevel = TraceLevel.Verbose;
+
+            config.UseTimers();
 
             if (config.IsDevelopment)
             {
                 config.UseDevelopmentSettings();
             }
 
-            var host = new JobHost();
+            var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
         }

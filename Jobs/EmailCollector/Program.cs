@@ -23,7 +23,7 @@ namespace EmailCollector
                 config.UseDevelopmentSettings();
             }
 
-            var host = new JobHost();
+            var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
         }
