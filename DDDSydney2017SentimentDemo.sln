@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{8D038F54-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailCollector", "Jobs\EmailCollector\EmailCollector.csproj", "{FA62BB38-8868-44B1-88EE-3E728BCB1CE3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0E43E4C4-2A52-4D08-A80B-F1E755A5A405}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailAnalyser", "Jobs\EmailAnalyser\EmailAnalyser.csproj", "{F68CD6DE-A526-4FFF-9943-534B476C1B22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailJobRepository", "Jobs\MailJobRepository\MailJobRepository.csproj", "{FA0AAFC5-6C8D-4AC8-8871-058FFE09C6D3}"
