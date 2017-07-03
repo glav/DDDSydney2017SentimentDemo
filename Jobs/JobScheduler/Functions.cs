@@ -22,7 +22,7 @@ namespace JobScheduler
 
             var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings[ConfigKeys.CloudStorageConnectionString]);
             var queueClient = storageAccount.CreateCloudQueueClient();
-            var queue = queueClient.GetQueueReference(CloudStorageAssets.AnalyseQueueName);
+            var queue = queueClient.GetQueueReference(CloudStorageAssets.EmailQueueName);
             queue.CreateIfNotExists();
 
             var message = new CloudQueueMessage(JobCommandValues.CollectEmailCommand);
