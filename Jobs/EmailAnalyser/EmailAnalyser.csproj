@@ -98,6 +98,16 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DDD2017DemoAnalyser\DDD2017DemoAnalyser.csproj">
+      <Project>{254ae5d1-7c02-4504-965d-b3fac551dca4}</Project>
+      <Name>DDD2017DemoAnalyser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jobs.Core\Jobs.Core.csproj">
+      <Project>{307894AC-42E5-42F1-B517-3E9C97EC76D8}</Project>
+      <Name>Jobs.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Azure.DocumentDB.1.14.1\build\Microsoft.Azure.DocumentDB.targets" Condition="Exists('..\packages\Microsoft.Azure.DocumentDB.1.14.1\build\Microsoft.Azure.DocumentDB.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
