@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="CommandProcessors\MailCollectionProcessor.cs" />
+    <Compile Include="EmailCollectedEventTrigger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueCommandHandler.cs" />

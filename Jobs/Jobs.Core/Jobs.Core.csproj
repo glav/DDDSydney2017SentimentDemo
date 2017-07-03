@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudStorageAssets.cs" />
     <Compile Include="Data\JobPartitionKeys.cs" />
     <Compile Include="Diagnostics\JobLogger.cs" />
     <Compile Include="Data\EmailInformation.cs" />

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EmailCollector
 {
-    public class EmailCollectedEvent
+    public class EmailCollectedEventTrigger
     {
         public void Signal()
         {
