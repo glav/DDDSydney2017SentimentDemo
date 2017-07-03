@@ -28,7 +28,7 @@ namespace EmailCollector.CommandProcessors
             if (messages.Count > 0)
             {
                 _logger.WriteLine("Signaling Email collected event");
-                var trigger = new EmailCollectedEventTrigger();
+                var trigger = new EmailCollectedEventTrigger(_logger);
                 trigger.Signal();
             }
         }
