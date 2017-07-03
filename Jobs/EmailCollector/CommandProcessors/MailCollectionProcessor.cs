@@ -24,6 +24,13 @@ namespace EmailCollector.CommandProcessors
         {
             var messages = GetLatestMail();
             StoreCollectedMail(messages);
+
+            if (messages.Count > 0)
+            {
+                _logger.WriteLine("Signaling Email collected event");
+                var trigger = new EmailCollectedEventTrigger();
+                trigger.Signal();
+            }
         }
 
         private List<EmailInformation> GetLatestMail()

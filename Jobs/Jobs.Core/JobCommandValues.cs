@@ -11,5 +11,6 @@ namespace Jobs.Core
         public static string CollectEmailCommand = "[##collectmail##]";
         public static string AddSampleData = "[##addsampledata##]";
         public static string ClearStore = "[##clearstore##]";
+        public static string AnalyseCollectedEmail = "[##analysecollectedemail##]";
     }
 }
