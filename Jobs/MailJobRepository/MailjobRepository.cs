@@ -47,7 +47,7 @@ namespace MailJobRepository
             }
         }
 
-        public async Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysed()
+        public async Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysedAsync()
         {
             await EnsureSetup();
             var query = _client.CreateDocumentQuery<EmailInformation>(DocumentCollectionUri,new FeedOptions {EnableCrossPartitionQuery = false, PartitionKey = new PartitionKey(JobPartitionKeys.NewMail) })

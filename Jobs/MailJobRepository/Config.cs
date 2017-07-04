@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MailJobRepository
 {
-    public class Config
+    internal class Config
     {
         public Config()
         {

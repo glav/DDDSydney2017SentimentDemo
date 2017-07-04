@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Jobs.Core;
+using Jobs.Core.Diagnostics;
 
 namespace EmailAnalyser
 {
@@ -17,8 +18,10 @@ namespace EmailAnalyser
         {
             log.WriteLine($"received message on{CloudStorageAssets.AnalyseQueueName} queue ");
             log.WriteLine(message);
-            var testclass = new DDD2017DemoAnalyser.Class1();
-            testclass.Test();
+            var handler = new EmailAnalyseHandler(new MailJobRepository.MailJobRepository(), new Config(), new JobLogger(log));
+            handler.AnalyseAsync().Wait();
+            //var testclass = new DDD2017DemoAnalyser.Class1();
+            //testclass.Test();
         }
     }
 }

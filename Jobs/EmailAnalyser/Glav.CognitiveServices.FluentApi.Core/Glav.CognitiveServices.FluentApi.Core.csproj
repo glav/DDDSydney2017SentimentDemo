@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <RootNamespace>Glav.CognitiveServices.FluentApi.Core</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.5.0-alpha</Version>
+    <Authors>Paul Glavich</Authors>
+    <Company />
+    <Product>Cognitive Services Fluent API</Product>
+    <Description>This package represents a set of common core components to be used with the various cognitive services fluent API packages.</Description>
+    <Copyright>Paul Glavich 2017</Copyright>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Cognitive services, .net core, azure</PackageTags>
+    <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>

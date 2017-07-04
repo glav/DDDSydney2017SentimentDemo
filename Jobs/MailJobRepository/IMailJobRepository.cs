@@ -12,7 +12,7 @@ namespace MailJobRepository
     {
         Task StoreMailMessagesAsync(IEnumerable<EmailInformation> mailMessages);
         Task ClearAllMailMessagesAsync();
-        Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysed();
+        Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysedAsync();
         Task UpdateMessageAsync(EmailInformation emailMsg);
     }
 }
