@@ -18,7 +18,8 @@ namespace EmailAnalyser
         {
             log.WriteLine($"received message on{CloudStorageAssets.AnalyseQueueName} queue ");
             log.WriteLine(message);
-            var handler = new EmailAnalyseHandler(new MailJobRepository.MailJobRepository(), new Config(), new JobLogger(log));
+            var repo = new MailJobRepository.MailJobRepository();
+            var handler = new EmailAnalyseHandler(repo, new Config(), new JobLogger(log));
             handler.AnalyseAsync().Wait();
             //var testclass = new DDD2017DemoAnalyser.Class1();
             //testclass.Test();

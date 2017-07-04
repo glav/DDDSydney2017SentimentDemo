@@ -17,7 +17,7 @@ namespace MailJobRepository
 
         public MailJobRepository()
         {
-            _client = new DocumentClient(new Uri(_config.DocumentDbEndpoint), _config.DocumentDbAccessKey);
+           _client = new DocumentClient(new Uri(_config.DocumentDbEndpoint), _config.DocumentDbAccessKey);
         }
 
         public Task ClearAllMailMessagesAsync()
@@ -39,12 +39,12 @@ namespace MailJobRepository
         public async Task UpdateMessageAsync(EmailInformation emailMsg)
         {
             await EnsureSetup();
-            var query = _client.CreateDocumentQuery<EmailInformation>(DocumentCollectionUri)
-               .Where(f => f.id == emailMsg.id).FirstOrDefault();
-            if (query != null)
-            {
+            //var query = _client.CreateDocumentQuery<EmailInformation>(DocumentCollectionUri)
+            //   .Where(f => f.id == emailMsg.id).FirstOrDefault();
+            //if (query != null)
+            //{
                 await _client.UpsertDocumentAsync(DocumentCollectionUri, emailMsg);
-            }
+            //}
         }
 
         public async Task<IEnumerable<EmailInformation>> GetMailCollectedToBeAnalysedAsync()
