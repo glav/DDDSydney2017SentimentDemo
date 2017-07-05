@@ -3,23 +3,37 @@ import { Http } from '@angular/http';
 
 @Component({
     selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+    templateUrl: './fetchdata.component.html',
+    styleUrls: ['./fetchdata.component.css']
 })
 export class FetchDataComponent {
     public emails: EmailInfo[];
+    public originUrl: string;
+    http: Http;
+    public showAll: boolean;
 
     constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string) {
-        http.get(originUrl + '/api/SampleData/EmailSentiment').subscribe(result => {
+        this.originUrl = originUrl;
+        this.http = http;
+
+        // Do initil retrieve
+        this.getLatestData();
+
+        // Then set periodic calls in motion
+        setInterval(() => {
+            this.getLatestData();    
+        }, 5000);
+    }
+
+    getLatestData(): void {
+        this.http.get(this.originUrl + '/api/SampleData/EmailSentiment').subscribe(result => {
             this.emails = result.json() as EmailInfo[];
         });
     }
-}
 
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+    showAllToggle(): void {
+        this.showAll = !this.showAll;
+    }
 }
 
 interface EmailInfo {

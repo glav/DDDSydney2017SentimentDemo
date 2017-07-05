@@ -22,8 +22,13 @@ namespace Website.Data
         public string partitionKey { get; set; }
 
         public double SentimentScore { get; set; }
-        
-        //add in mail sentiment rating - positive, negative etc..
-        // also add other emotions perhaps, anger, contempt etc.
+        public string SentimentCss { get; set; }
+
+        public string SentimentText { get; set; }
+
+
     }
+
+    //add in mail sentiment rating - positive, negative etc..
+    // also add other emotions perhaps, anger, contempt etc.
 }

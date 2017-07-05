@@ -4,49 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Website.Data;
+using Website.Domain;
 
 namespace Website.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private MailJobRepository _repo = new MailJobRepository();
-
-        private static string[] Summaries = new[]
-        {
-            "Whatevs", "yeah", "woot", "whatevs", "yo", "hoot", "snot", "crap", "yah", "blart"
-        };
+        private ViewModelEngine _viewEngine = new ViewModelEngine();
 
         [HttpGet("[action]")]
         public async Task<IEnumerable<EmailInformation>> EmailSentiment()
         {
-            var emails = await _repo.GetAnalysedMailAsync();
+            var emails = await _viewEngine.GetSentimentViewModelsAsync();
             return emails;
 
-            //var rng = new Random();
-            //return Enumerable.Range(1, 5).Select(index => new EmailInformation
-            //{
-            //    id = Guid.NewGuid().ToString(),
-            //    Body = "Body",
-            //    SentimentScore = rng.Next(-20, 55),
-            //    From = "test@test.com",
-            //    TimeOfMail = DateTime.UtcNow
-            //});
         }
 
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
-        }
     }
 }

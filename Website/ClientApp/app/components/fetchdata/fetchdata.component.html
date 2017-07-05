@@ -1,24 +1,27 @@
 <h1>Email results</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<h4>Sentiment of the email being sent to FeedbackForGlavsTalk@gmail.com</h4>
 
 <p *ngIf="!emails"><em>Loading...</em></p>
 
+<button *ngIf="emails" (click)="showAllToggle()">Show All Details</button>
 <table class='table' *ngIf="emails">
     <thead>
         <tr>
             <th>From</th>
             <th>Date/Time(C)</th>
-            <th>Sentiment Score</th>
-            <th>Body</th>
+            <th>Sentiment</th>
+            <th *ngIf="showAll">Sentiment Score</th>
+            <th *ngIf="showAll">Body</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let email of emails">
             <td>{{ email.from }}</td>
             <td>{{ email.timeOfMail }}</td>
-            <td>{{ email.sentimentScore}}</td>
-            <td>{{ email.body }}</td>
+            <td class="{{ email.sentimentCss }}">{{ email.sentimentText }}</td>
+            <td *ngIf="showAll">{{ email.sentimentScore}}</td>
+            <td *ngIf="showAll">{{ email.body }}</td>
         </tr>
     </tbody>
 </table>

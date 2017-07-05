@@ -1,0 +1,19 @@
+.positive {
+    background-color:green;
+    color:white;
+}
+
+.mild-positive {
+    background-color: cadetblue;
+    color: white;
+}
+
+.mild-negative {
+    background-color: coral;
+    color: white;
+}
+
+.negative {
+    background-color: maroon;
+    color:white;
+}
