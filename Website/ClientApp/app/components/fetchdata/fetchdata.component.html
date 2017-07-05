@@ -1,24 +1,24 @@
-<h1>Weather forecast</h1>
+<h1>Email results</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!emails"><em>Loading...</em></p>
 
-<table class='table' *ngIf="forecasts">
+<table class='table' *ngIf="emails">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>From</th>
+            <th>Date/Time(C)</th>
+            <th>Sentiment Score</th>
+            <th>Body</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+        <tr *ngFor="let email of emails">
+            <td>{{ email.from }}</td>
+            <td>{{ email.timeOfMail }}</td>
+            <td>{{ email.sentimentScore}}</td>
+            <td>{{ email.body }}</td>
         </tr>
     </tbody>
 </table>

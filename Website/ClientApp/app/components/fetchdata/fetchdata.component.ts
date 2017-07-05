@@ -6,11 +6,11 @@ import { Http } from '@angular/http';
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public forecasts: WeatherForecast[];
+    public emails: EmailInfo[];
 
     constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string) {
-        http.get(originUrl + '/api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
+        http.get(originUrl + '/api/SampleData/EmailSentiment').subscribe(result => {
+            this.emails = result.json() as EmailInfo[];
         });
     }
 }
@@ -20,4 +20,11 @@ interface WeatherForecast {
     temperatureC: number;
     temperatureF: number;
     summary: string;
+}
+
+interface EmailInfo {
+    from: string;
+    timeOfMail: string;
+    body: string;
+
 }

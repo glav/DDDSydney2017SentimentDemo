@@ -40,6 +40,7 @@ namespace EmailAnalyser
                 foreach (var mailMsg in mails)
                 {
                     _logger.WriteLine($"Processing mail: [{mailMsg.From}]");
+
                     var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(_config.TextanalyticApiKey, LocationKeyIdentifier.WestUs)
                         .AddConsoleDiagnosticLogging()
                         .UsingHttpCommunication()
@@ -58,7 +59,6 @@ namespace EmailAnalyser
                     {
                         _logger.WriteLine("Mail did not process successfully.");
                     }
-                    //mailMsg.
                 }
             }
         }

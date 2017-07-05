@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Website.Data;
 
 namespace Website.Controllers
 {
@@ -11,18 +12,20 @@ namespace Website.Controllers
     {
         private static string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Whatevs", "yeah", "woot", "whatevs", "yo", "hoot", "snot", "crap", "yah", "blart"
         };
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public IEnumerable<EmailInformation> EmailSentiment()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Enumerable.Range(1, 5).Select(index => new EmailInformation
             {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                id = Guid.NewGuid().ToString(),
+                Body = "Body",
+                SentimentScore = rng.Next(-20, 55),
+                From = "test@test.com",
+                TimeOfMail = DateTime.UtcNow
             });
         }
 
