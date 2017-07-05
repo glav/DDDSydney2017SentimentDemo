@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Website.Data;
 
 namespace Website
 {
@@ -21,6 +22,16 @@ namespace Website
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            SetGlobalConfig();
+        }
+
+        private void SetGlobalConfig()
+        {
+            Config.SetConfig(Configuration["Data:documentDbName"], 
+                Configuration["Data:documentDbCollection"],
+                Configuration["Data:documentDbAccessKey"], 
+                Configuration["Data:documentDbEndpoint"]);
         }
 
         public IConfigurationRoot Configuration { get; }

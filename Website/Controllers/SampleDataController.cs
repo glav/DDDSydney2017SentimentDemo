@@ -10,23 +10,28 @@ namespace Website.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+        private MailJobRepository _repo = new MailJobRepository();
+
         private static string[] Summaries = new[]
         {
             "Whatevs", "yeah", "woot", "whatevs", "yo", "hoot", "snot", "crap", "yah", "blart"
         };
 
         [HttpGet("[action]")]
-        public IEnumerable<EmailInformation> EmailSentiment()
+        public async Task<IEnumerable<EmailInformation>> EmailSentiment()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new EmailInformation
-            {
-                id = Guid.NewGuid().ToString(),
-                Body = "Body",
-                SentimentScore = rng.Next(-20, 55),
-                From = "test@test.com",
-                TimeOfMail = DateTime.UtcNow
-            });
+            var emails = await _repo.GetAnalysedMailAsync();
+            return emails;
+
+            //var rng = new Random();
+            //return Enumerable.Range(1, 5).Select(index => new EmailInformation
+            //{
+            //    id = Guid.NewGuid().ToString(),
+            //    Body = "Body",
+            //    SentimentScore = rng.Next(-20, 55),
+            //    From = "test@test.com",
+            //    TimeOfMail = DateTime.UtcNow
+            //});
         }
 
         public class WeatherForecast
