@@ -47,19 +47,26 @@ namespace EmailAnalyser
                         .WithTextAnalyticAnalysisActions()
                         .AddSentimentAnalysis(mailMsg.Body)
                         .AnalyseAllSentimentsAsync();
-                    if (result.TextAnalyticSentimentAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
-                    {
-                        _logger.WriteLine("Mail processed ok");
-                        var mailClassification = result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].score;
-                        mailMsg.HasBeenAnalysed = true;
-                        mailMsg.partitionKey = "analysedmail";
-                        mailMsg.SentimentScore = mailClassification;
-                        await _repository.UpdateMessageAsync(mailMsg);
-                    } else
-                    {
-                        _logger.WriteLine("Mail did not process successfully.");
-                    }
+
+                    await UpdateMailMessage(mailMsg, result);
                 }
+            }
+        }
+
+        private async Task UpdateMailMessage(Jobs.Core.Data.EmailInformation mailMsg, TextAnalyticAnalysisResults result)
+        {
+            if (result.TextAnalyticSentimentAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
+            {
+                _logger.WriteLine("Mail processed ok");
+                var mailClassification = result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].score;
+                mailMsg.HasBeenAnalysed = true;
+                mailMsg.partitionKey = "analysedmail";
+                mailMsg.SentimentScore = mailClassification;
+                await _repository.UpdateMessageAsync(mailMsg);
+            }
+            else
+            {
+                _logger.WriteLine("Mail did not process successfully.");
             }
         }
     }
