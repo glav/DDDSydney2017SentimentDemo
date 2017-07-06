@@ -61,7 +61,8 @@ namespace EmailCollector.CommandProcessors
                 {
                     var headers = client.GetMessageHeaders(i);
                     var msg = client.GetMessage(i);
-                    allMessages.Add(new EmailInformation { From = headers.From?.Address, Body = msg.FindFirstPlainTextVersion().GetBodyAsText(), TimeOfMail = headers.DateSent.Date, partitionKey="newmail" });
+
+                    allMessages.Add(new EmailInformation { From = headers.From?.Address, Body = msg.FindFirstPlainTextVersion().GetBodyAsText(), TimeOfMail = headers.DateSent, partitionKey="newmail" });
                 }
 
                 _logger.WriteLine($"#{messageCount} messages have been collected");

@@ -28,7 +28,9 @@ namespace Website.Data
         {
             await EnsureSetup();
             var query = _client.CreateDocumentQuery<EmailInformation>(DocumentCollectionUri, new FeedOptions { EnableCrossPartitionQuery = false, PartitionKey = new PartitionKey(JobPartitionKeys.AnalysedMail) })
-               .Where(f => f.HasBeenAnalysed == true).ToList();
+               .Where(f => f.HasBeenAnalysed == true)
+               .OrderBy(o => o.TimeOfMail)
+               .ToList();
             return query;
         }
 

@@ -16,7 +16,7 @@ namespace JobScheduler
     {
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
-        public static void ProcessTimerEvent([TimerTrigger("0/30 * * * * *")] TimerInfo timer)
+        public static void ProcessTimerEvent([TimerTrigger("0/20 * * * * *")] TimerInfo timer)
         {
             Console.WriteLine("Timer fired");
 
