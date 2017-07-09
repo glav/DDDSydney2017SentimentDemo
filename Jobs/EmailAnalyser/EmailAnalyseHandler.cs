@@ -46,7 +46,7 @@ namespace EmailAnalyser
                         .UsingHttpCommunication()
                         .WithTextAnalyticAnalysisActions()
                         .AddSentimentAnalysis(mailMsg.Body)
-                        .AddKeyTopicAnalysis(mailMsg.Body)
+                        .AddKeyPhraseAnalysis(mailMsg.Body)
                         .AnalyseAllSentimentsAsync();
 
                     await UpdateMailMessage(mailMsg, result);
@@ -82,7 +82,7 @@ namespace EmailAnalyser
                 }
                 else
                 {
-                    _logger.WriteLine("Key{Phrase analysis did not work - no results.");
+                    _logger.WriteLine("KeyPhrase analysis did not work - no results.");
                 }
                 mailMsg.HasBeenAnalysed = true;
                 mailMsg.partitionKey = "analysedmail";
