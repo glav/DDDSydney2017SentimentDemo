@@ -62,12 +62,14 @@ namespace EmailAnalyser
                 var mailClassification = result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].score;
                 if (result.TextAnalyticKeyPhraseAnalysis != null && result.TextAnalyticKeyPhraseAnalysis.AnalysisResult != null)
                 {
+                    _logger.WriteLine("Keyphrase: Has some results");
                     if (result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
                     {
+                        _logger.WriteLine("Action submitted successfully.");
                         var keyResult = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult;
                         if (keyResult.ResponseData != null && keyResult.ResponseData.documents.Length > 0)
                         {
-                            var keyPhrases = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0]?.keyPhrases[0];
+                            var keyPhrases = keyResult.ResponseData.documents[0]?.keyPhrases[0];
                             mailMsg.KeyPhrases = keyPhrases;
                         }
                         else
