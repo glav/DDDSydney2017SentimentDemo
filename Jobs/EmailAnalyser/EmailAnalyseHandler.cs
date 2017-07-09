@@ -46,6 +46,7 @@ namespace EmailAnalyser
                         .UsingHttpCommunication()
                         .WithTextAnalyticAnalysisActions()
                         .AddSentimentAnalysis(mailMsg.Body)
+                        .AddKeyTopicAnalysis(mailMsg.Body)
                         .AnalyseAllSentimentsAsync();
 
                     await UpdateMailMessage(mailMsg, result);
@@ -59,6 +60,7 @@ namespace EmailAnalyser
             {
                 _logger.WriteLine("Mail processed ok");
                 var mailClassification = result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].score;
+                var keyPhrases = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0]?.keyPhrases[0];
                 mailMsg.HasBeenAnalysed = true;
                 mailMsg.partitionKey = "analysedmail";
                 mailMsg.SentimentScore = mailClassification;

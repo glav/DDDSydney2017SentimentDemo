@@ -3,6 +3,7 @@ using Jobs.Core.Data;
 using Jobs.Core.Diagnostics;
 using MailJobRepository;
 using OpenPop.Pop3;
+using System;
 using System.Collections.Generic;
 
 namespace EmailCollector.CommandProcessors
@@ -62,7 +63,13 @@ namespace EmailCollector.CommandProcessors
                     var headers = client.GetMessageHeaders(i);
                     var msg = client.GetMessage(i);
 
-                    allMessages.Add(new EmailInformation { From = headers.From?.Address, Body = msg.FindFirstPlainTextVersion().GetBodyAsText(), TimeOfMail = headers.DateSent, partitionKey="newmail" });
+                    allMessages.Add(new EmailInformation
+                        {
+                            From = headers.From?.Address,
+                            Body = msg.FindFirstPlainTextVersion().GetBodyAsText(),
+                            TimeOfMail = headers.DateSent,
+                            DateTimeProcessed = DateTime.UtcNow,
+                            partitionKey ="newmail" });
                 }
 
                 _logger.WriteLine($"#{messageCount} messages have been collected");
