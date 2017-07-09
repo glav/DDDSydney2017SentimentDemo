@@ -11,9 +11,9 @@
             <th>From</th>
             <th>Date/Time(C)</th>
             <th>Sentiment</th>
+            <th>Key Phrases</th>
             <th *ngIf="showAll">Sentiment Score</th>
             <th *ngIf="showAll">Body</th>
-            <th *ngIf="showAll">Key Phrases</th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +21,9 @@
             <td>{{ email.from }}</td>
             <td>{{ email.timeOfMail }}</td>
             <td class="{{ email.sentimentCss }}">{{ email.sentimentText }}</td>
+            <td>{{ email.keyPhrases }}</td>
             <td *ngIf="showAll">{{ email.sentimentScore}}</td>
             <td *ngIf="showAll">{{ email.body }}</td>
-            <td *ngIf="showAll">{{ email.keyPhrases }}</td>
         </tr>
     </tbody>
 </table>
