@@ -86,6 +86,7 @@ namespace EmailAnalyser
                 {
                     _logger.WriteLine("KeyPhrase analysis did not work - no results.");
                 }
+                _logger.WriteLine("Updating mail store");
                 mailMsg.HasBeenAnalysed = true;
                 mailMsg.partitionKey = "analysedmail";
                 mailMsg.SentimentScore = mailClassification;
