@@ -26,7 +26,7 @@ namespace Website.Data
 
         public string SentimentText { get; set; }
 
-
+        public string KeyPhrases { get; set; }
     }
 
     //add in mail sentiment rating - positive, negative etc..

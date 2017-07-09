@@ -22,9 +22,7 @@ namespace Jobs.Core.Data
         public string partitionKey { get; set; }
 
         public double SentimentScore { get; set; }
-        public string[] KeyPhrases { get; set; }
+        public string KeyPhrases { get; set; }
         
-        //add in mail sentiment rating - positive, negative etc..
-        // also add other emotions perhaps, anger, contempt etc.
     }
 }
