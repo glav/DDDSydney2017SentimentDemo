@@ -60,25 +60,30 @@ namespace EmailAnalyser
             {
                 _logger.WriteLine("Mail processed ok");
                 var mailClassification = result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].score;
-                if (result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
+                if (result.TextAnalyticKeyPhraseAnalysis != null && result.TextAnalyticKeyPhraseAnalysis.AnalysisResult != null)
                 {
-                    var keyResult = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult;
-                    if (keyResult.ResponseData != null && keyResult.ResponseData.documents.Length > 0)
+                    if (result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
                     {
-                        var keyPhrases = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0]?.keyPhrases[0];
-                        mailMsg.KeyPhrases = keyPhrases;
+                        var keyResult = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult;
+                        if (keyResult.ResponseData != null && keyResult.ResponseData.documents.Length > 0)
+                        {
+                            var keyPhrases = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0]?.keyPhrases[0];
+                            mailMsg.KeyPhrases = keyPhrases;
+                        }
+                        else
+                        {
+                            _logger.WriteLine("No data in keyphrase analysis");
+                        }
                     } else
                     {
-                        _logger.WriteLine("No data in keyphrase analysis");
+                        _logger.WriteLine("Key{Phrase analysis did not work.");
+                        _logger.WriteLine($"Error: {result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.errors.FirstOrDefault().message} ");
                     }
-                } else
-                {
-                    _logger.WriteLine("Key{Phrase analysis did not work.");
-                    _logger.WriteLine($"Error: {result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.errors.FirstOrDefault().message} ");
-
                 }
-
-                
+                else
+                {
+                    _logger.WriteLine("Key{Phrase analysis did not work - no results.");
+                }
                 mailMsg.HasBeenAnalysed = true;
                 mailMsg.partitionKey = "analysedmail";
                 mailMsg.SentimentScore = mailClassification;
